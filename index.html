@@ -364,6 +364,7 @@ select.field-input option{background:var(--card);color:var(--text);}
       <button class="nav-dot" onclick="goSlide(7)"></button>
       <button class="nav-dot" onclick="goSlide(8)"></button>
       <button class="nav-dot" onclick="goSlide(9)"></button>
+      <button class="nav-dot" onclick="goSlide(10)"></button>
     </div>
     <button class="fcta-btn" onclick="startDiag()" style="padding:10px 20px;font-size:12px;animation:none;">
       🤖 DIAGNÓSTICO GRATIS
@@ -605,8 +606,187 @@ select.field-input option{background:var(--card);color:var(--text);}
     </div>
   </section>
 
-  <!-- SLIDE 10 — CTA FINAL -->
-  <section class="slide" id="s10" style="flex-direction:column;text-align:center;background:var(--darker);">
+  <!-- SLIDE 10 — DEMO EN VIVO -->
+  <section class="slide" id="s10" style="flex-direction:column;padding:80px 24px 32px;background:var(--darker);min-height:100vh;">
+    <div class="glow-orb" style="width:700px;height:400px;background:#9B30FF;top:0;left:50%;transform:translateX(-50%);opacity:.06;filter:blur(130px);pointer-events:none;"></div>
+    <div class="grid-bg"></div>
+
+    <!-- HEADER -->
+    <div style="text-align:center;margin-bottom:20px;position:relative;z-index:2;">
+      <div class="badge" style="margin-bottom:14px;"><span class="dot"></span> DEMOSTRACIÓN EN VIVO — GENESIS ENTERPRISE</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4.5vw,58px);line-height:1;margin-bottom:10px;">
+        ASÍ TRABAJA TU <span class="gradient-text">EMPRESA CON IA</span>
+      </h2>
+      <p style="font-size:13px;color:#A8B8CC;max-width:600px;margin:0 auto;line-height:1.7;">
+        4 departamentos · 12 agentes digitales · operando 24/7 · 
+        <strong style="color:#C44DFF;">Clic en cualquier área, agente o tab del panel para interactuar</strong>
+      </p>
+    </div>
+
+    <!-- MAIN DEMO LAYOUT: canvas + sidebar panel -->
+    <div style="position:relative;z-index:2;width:100%;max-width:1280px;margin:0 auto;display:flex;gap:12px;align-items:flex-start;">
+
+      <!-- LEFT: Browser frame + canvas -->
+      <div style="flex:1;min-width:0;">
+        <!-- Browser bar -->
+        <div style="background:#09060F;border:1px solid rgba(155,48,255,.45);border-bottom:none;border-radius:10px 10px 0 0;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+          <div style="display:flex;gap:5px;flex-shrink:0;">
+            <div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div>
+            <div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div>
+          </div>
+          <div style="flex:1;background:rgba(155,48,255,.1);border:1px solid rgba(155,48,255,.25);border-radius:4px;padding:3px 10px;font-family:'Space Mono',monospace;font-size:9px;color:#C44DFF;">
+            genesis-enterprise.ia / oficina-virtual / operaciones-en-vivo
+          </div>
+          <div style="display:flex;align-items:center;gap:5px;font-family:'Space Mono',monospace;font-size:9px;color:#00FF94;flex-shrink:0;">
+            <span style="width:6px;height:6px;border-radius:50%;background:#00FF94;animation:pulse 1s infinite;display:inline-block;"></span>EN VIVO
+          </div>
+          <div style="display:flex;gap:5px;flex-shrink:0;margin-left:6px;">
+            <button onclick="genesisRunAll()" style="background:linear-gradient(135deg,#9B30FF,#C44DFF);color:#fff;border:none;border-radius:4px;padding:4px 9px;font-size:9px;cursor:pointer;font-family:'Space Mono',monospace;letter-spacing:.5px;white-space:nowrap;">▶ CORRER TODO</button>
+            <button onclick="genesisReset()" style="background:rgba(255,255,255,.06);color:#C44DFF;border:1px solid rgba(155,48,255,.3);border-radius:4px;padding:4px 9px;font-size:9px;cursor:pointer;font-family:'Space Mono',monospace;">↺</button>
+          </div>
+        </div>
+
+        <!-- Canvas -->
+        <div id="genesis-demo-wrap" style="width:100%;background:#0A0618;border:1px solid rgba(155,48,255,.3);border-top:none;border-radius:0 0 10px 10px;overflow:hidden;position:relative;">
+          <canvas id="genesis-demo-cv" style="display:block;width:100%;height:430px;"></canvas>
+          <!-- Dept action buttons -->
+          <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10;">
+            <button onclick="genesisRunDept('admin')" style="background:#3B6FD4;color:#fff;border:none;border-radius:5px;padding:5px 11px;font-size:9px;font-family:'Space Mono',monospace;cursor:pointer;letter-spacing:.5px;opacity:.9;">📋 ADMIN</button>
+            <button onclick="genesisRunDept('mkt')"   style="background:#E8500A;color:#fff;border:none;border-radius:5px;padding:5px 11px;font-size:9px;font-family:'Space Mono',monospace;cursor:pointer;letter-spacing:.5px;opacity:.9;">📣 MARKETING</button>
+            <button onclick="genesisRunDept('cont')"  style="background:#12A06B;color:#fff;border:none;border-radius:5px;padding:5px 11px;font-size:9px;font-family:'Space Mono',monospace;cursor:pointer;letter-spacing:.5px;opacity:.9;">💳 CONTAB.</button>
+            <button onclick="genesisRunDept('ia')"    style="background:#7B2FBE;color:#fff;border:none;border-radius:5px;padding:5px 11px;font-size:9px;font-family:'Space Mono',monospace;cursor:pointer;letter-spacing:.5px;opacity:.9;">🧠 IA OPS</button>
+          </div>
+        </div>
+
+        <!-- KPI strip -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;">
+          <div style="background:rgba(59,111,212,.12);border:1px solid rgba(59,111,212,.35);border-radius:7px;padding:10px;text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#7BAAFF;" id="gd-oc">0</div>
+            <div style="font-size:9px;color:#90A8CC;letter-spacing:1.5px;margin-top:1px;">ÓRDENES COMPRA</div>
+          </div>
+          <div style="background:rgba(232,80,10,.12);border:1px solid rgba(232,80,10,.35);border-radius:7px;padding:10px;text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#FF8855;" id="gd-leads">0</div>
+            <div style="font-size:9px;color:#90A8CC;letter-spacing:1.5px;margin-top:1px;">LEADS CAPTURADOS</div>
+          </div>
+          <div style="background:rgba(18,160,107,.12);border:1px solid rgba(18,160,107,.35);border-radius:7px;padding:10px;text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#34E8A0;" id="gd-fac">0</div>
+            <div style="font-size:9px;color:#90A8CC;letter-spacing:1.5px;margin-top:1px;">FACTURAS EMITIDAS</div>
+          </div>
+          <div style="background:rgba(155,48,255,.12);border:1px solid rgba(155,48,255,.35);border-radius:7px;padding:10px;text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:#C44DFF;" id="gd-pipe">$0</div>
+            <div style="font-size:9px;color:#90A8CC;letter-spacing:1.5px;margin-top:1px;">PIPELINE GENERADO</div>
+          </div>
+        </div>
+      </div><!-- end left -->
+
+      <!-- RIGHT: Interactive Dashboard Panel -->
+      <div style="width:270px;flex-shrink:0;background:#09060F;border:1px solid rgba(155,48,255,.35);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;height:560px;">
+
+        <!-- Panel header -->
+        <div style="padding:10px 14px;border-bottom:1px solid rgba(155,48,255,.2);display:flex;align-items:center;justify-content:space-between;">
+          <span style="font-family:'Space Mono',monospace;font-size:9px;color:#C44DFF;letter-spacing:2px;">◈ CONTROL PANEL</span>
+          <span style="font-size:9px;color:#34E8A0;font-family:'Space Mono',monospace;" id="gd-active-count">0/12 activos</span>
+        </div>
+
+        <!-- Tabs -->
+        <div style="display:flex;border-bottom:1px solid rgba(155,48,255,.15);background:#05030C;">
+          <button class="gdtab on" id="gdtab-dptos"  onclick="gdSetTab('dptos')" style="flex:1;padding:8px 2px;font-family:'Space Mono',monospace;font-size:7px;border:none;border-bottom:2px solid #C44DFF;background:transparent;color:#C44DFF;cursor:pointer;letter-spacing:.5px;">DPTOS</button>
+          <button class="gdtab"    id="gdtab-equipo" onclick="gdSetTab('equipo')" style="flex:1;padding:8px 2px;font-family:'Space Mono',monospace;font-size:7px;border:none;border-bottom:2px solid transparent;background:transparent;color:#5A4A70;cursor:pointer;letter-spacing:.5px;">EQUIPO</button>
+          <button class="gdtab"    id="gdtab-kpis"   onclick="gdSetTab('kpis')" style="flex:1;padding:8px 2px;font-family:'Space Mono',monospace;font-size:7px;border:none;border-bottom:2px solid transparent;background:transparent;color:#5A4A70;cursor:pointer;letter-spacing:.5px;">KPIs</button>
+          <button class="gdtab"    id="gdtab-log"    onclick="gdSetTab('log')" style="flex:1;padding:8px 2px;font-family:'Space Mono',monospace;font-size:7px;border:none;border-bottom:2px solid transparent;background:transparent;color:#5A4A70;cursor:pointer;letter-spacing:.5px;">LOG</button>
+        </div>
+
+        <!-- Tab bodies -->
+        <div style="flex:1;overflow-y:auto;padding:10px;" id="gd-panel-body">
+
+          <!-- DPTOS TAB (default) -->
+          <div id="gdtab-dptos-body">
+            <div class="gd-dept-card" onclick="genesisRunDept('admin')" style="background:rgba(59,111,212,.1);border:1px solid rgba(59,111,212,.3);border-radius:7px;padding:10px;margin-bottom:7px;cursor:pointer;transition:all .2s;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <div style="width:28px;height:28px;background:#3B6FD4;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">📋</div>
+                <div><div style="font-family:'Space Mono',monospace;font-size:8px;color:#7BAAFF;letter-spacing:.5px;">ADMINISTRATIVO</div><div style="font-size:9px;color:#6A80A0;margin-top:1px;">Compras · ERP · Proveedores</div></div>
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;background:rgba(59,111,212,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#7BAAFF;font-family:'Space Mono',monospace;" id="gd2-oc">0</div><div style="font-size:8px;color:#5A7090;">Órdenes</div></div>
+                <div style="flex:1;background:rgba(59,111,212,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#7BAAFF;font-family:'Space Mono',monospace;" id="gd2-prov">0</div><div style="font-size:8px;color:#5A7090;">Proveed.</div></div>
+                <div style="flex:1;background:rgba(59,111,212,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#7BAAFF;font-family:'Space Mono',monospace;" id="gd2-erp">0</div><div style="font-size:8px;color:#5A7090;">ERP Regs</div></div>
+              </div>
+            </div>
+            <div class="gd-dept-card" onclick="genesisRunDept('mkt')" style="background:rgba(232,80,10,.1);border:1px solid rgba(232,80,10,.3);border-radius:7px;padding:10px;margin-bottom:7px;cursor:pointer;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <div style="width:28px;height:28px;background:#E8500A;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">📣</div>
+                <div><div style="font-family:'Space Mono',monospace;font-size:8px;color:#FF8855;letter-spacing:.5px;">MARKETING</div><div style="font-size:9px;color:#6A6050;margin-top:1px;">Meta Ads · CRM · Demos</div></div>
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;background:rgba(232,80,10,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#FF8855;font-family:'Space Mono',monospace;" id="gd2-leads">0</div><div style="font-size:8px;color:#6A5040;">Leads</div></div>
+                <div style="flex:1;background:rgba(232,80,10,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#FF8855;font-family:'Space Mono',monospace;" id="gd2-ads">0</div><div style="font-size:8px;color:#6A5040;">Anuncios</div></div>
+                <div style="flex:1;background:rgba(232,80,10,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#FF8855;font-family:'Space Mono',monospace;" id="gd2-meets">0</div><div style="font-size:8px;color:#6A5040;">Demos</div></div>
+              </div>
+            </div>
+            <div class="gd-dept-card" onclick="genesisRunDept('cont')" style="background:rgba(18,160,107,.1);border:1px solid rgba(18,160,107,.3);border-radius:7px;padding:10px;margin-bottom:7px;cursor:pointer;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <div style="width:28px;height:28px;background:#12A06B;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">💳</div>
+                <div><div style="font-family:'Space Mono',monospace;font-size:8px;color:#34E8A0;letter-spacing:.5px;">CONTABILIDAD</div><div style="font-size:9px;color:#406050;margin-top:1px;">Facturas · Clientes · ERP</div></div>
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;background:rgba(18,160,107,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#34E8A0;font-family:'Space Mono',monospace;" id="gd2-fac">0</div><div style="font-size:8px;color:#406050;">Facturas</div></div>
+                <div style="flex:1;background:rgba(18,160,107,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#34E8A0;font-family:'Space Mono',monospace;" id="gd2-cli">0</div><div style="font-size:8px;color:#406050;">Clientes</div></div>
+                <div style="flex:1;background:rgba(18,160,107,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#34E8A0;font-family:'Space Mono',monospace;" id="gd2-val">$0k</div><div style="font-size:8px;color:#406050;">Valor</div></div>
+              </div>
+            </div>
+            <div class="gd-dept-card" onclick="genesisRunDept('ia')" style="background:rgba(123,47,190,.1);border:1px solid rgba(123,47,190,.3);border-radius:7px;padding:10px;cursor:pointer;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                <div style="width:28px;height:28px;background:#7B2FBE;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;">🧠</div>
+                <div><div style="font-family:'Space Mono',monospace;font-size:8px;color:#C44DFF;letter-spacing:.5px;">IA OPERATIONS</div><div style="font-size:9px;color:#503860;margin-top:1px;">Servidor · Agentes · KB</div></div>
+              </div>
+              <div style="display:flex;gap:4px;">
+                <div style="flex:1;background:rgba(123,47,190,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#C44DFF;font-family:'Space Mono',monospace;" id="gd2-agents">12</div><div style="font-size:8px;color:#503860;">Agentes</div></div>
+                <div style="flex:1;background:rgba(123,47,190,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#C44DFF;font-family:'Space Mono',monospace;">99.9%</div><div style="font-size:8px;color:#503860;">Uptime</div></div>
+                <div style="flex:1;background:rgba(123,47,190,.15);border-radius:4px;padding:5px;text-align:center;"><div style="font-size:13px;font-weight:700;color:#C44DFF;font-family:'Space Mono',monospace;" id="gd2-tasks">0</div><div style="font-size:8px;color:#503860;">Automat.</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EQUIPO TAB -->
+          <div id="gdtab-equipo-body" style="display:none;">
+            <div id="gd-agent-list"></div>
+          </div>
+
+          <!-- KPIs TAB -->
+          <div id="gdtab-kpis-body" style="display:none;">
+            <div style="font-family:'Space Mono',monospace;font-size:8px;color:#5A4A70;letter-spacing:1px;margin-bottom:8px;">▸ PIPELINE DE VENTAS</div>
+            <div id="gd-pipeline-bars"></div>
+            <div style="font-family:'Space Mono',monospace;font-size:8px;color:#5A4A70;letter-spacing:1px;margin:10px 0 8px;">▸ TIEMPO AHORRADO HOY</div>
+            <div style="background:rgba(155,48,255,.08);border:1px solid rgba(155,48,255,.2);border-radius:6px;padding:10px;text-align:center;">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:#C44DFF;" id="gd-hours">0h</div>
+              <div style="font-size:9px;color:#7A6090;">horas de trabajo automatizado</div>
+            </div>
+            <div style="font-family:'Space Mono',monospace;font-size:8px;color:#5A4A70;letter-spacing:1px;margin:10px 0 8px;">▸ PRODUCTIVIDAD GLOBAL</div>
+            <div style="background:#0D0A1A;border-radius:6px;padding:8px;">
+              <canvas id="gd-spark" style="width:100%;height:60px;display:block;"></canvas>
+            </div>
+          </div>
+
+          <!-- LOG TAB -->
+          <div id="gdtab-log-body" style="display:none;">
+            <div id="gd-log-list"></div>
+          </div>
+
+        </div><!-- end panel body -->
+      </div><!-- end right panel -->
+
+    </div><!-- end main flex -->
+
+    <!-- Bottom CTA -->
+    <div style="text-align:center;margin-top:20px;position:relative;z-index:2;">
+      <p style="font-size:12px;color:#7A8899;margin-bottom:14px;">¿Quieres este sistema trabajando en tu empresa?</p>
+      <button class="cta-main" onclick="startDiag()">🚀 QUIERO MIS EMPLEADOS DIGITALES</button>
+    </div>
+  </section>
+
+  <!-- SLIDE 11 — CTA FINAL -->
+  <section class="slide" id="s11" style="flex-direction:column;text-align:center;background:var(--darker);">
     <div class="glow-orb" style="width:800px;height:800px;background:#9B30FF;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.05;filter:blur(150px);"></div>
     <div class="grid-bg"></div>
     <p class="section-label" style="color:var(--green);">🚀 SIGUIENTE PASO</p>
@@ -1116,6 +1296,375 @@ function initWA() {
     },delay);
   });
 }
+</script>
+<!-- GENESIS SIMULATOR ENGINE + INTERACTIVE DASHBOARD -->
+<script>
+(function(){
+const cv = document.getElementById('genesis-demo-cv');
+if(!cv) return;
+const ctx = cv.getContext('2d');
+let W, H;
+
+function resize(){
+  const wrap = document.getElementById('genesis-demo-wrap');
+  W = wrap.clientWidth; H = 430;
+  cv.width = W; cv.height = H;
+  agents.forEach(a => a.placeInZone());
+}
+
+const GM = {
+  admin:{oc:0,prov:0,erp:0}, mkt:{leads:0,ads:0,meets:0},
+  cont:{fac:0,cli:0,val:0},  ia:{tasks:0},
+  totalTasks:0, pipeline:0
+};
+const sparkData = Array(40).fill(0);
+
+function getZones(){
+  const pad=10, midX=W/2, midY=H/2;
+  return {
+    admin:{x:pad,    y:pad+22, w:midX-pad*1.5,  h:midY-pad-26,  label:'ADMINISTRATIVO', color:'#3B6FD4', floor:'#DCE8FF', border:'#93B4F5'},
+    mkt:{  x:midX+4, y:pad+22, w:W-midX-pad-4,  h:midY-pad-26,  label:'MARKETING',      color:'#E8500A', floor:'#FFE4D0', border:'#FFAA80'},
+    cont:{ x:pad,    y:midY+4, w:midX-pad*1.5,  h:H-midY-pad-4, label:'CONTABILIDAD',   color:'#12A06B', floor:'#D4F5E4', border:'#7ADDB3'},
+    ia:{   x:midX+4, y:midY+4, w:W-midX-pad-4,  h:H-midY-pad-4, label:'IA OPERATIONS',  color:'#7B2FBE', floor:'#EDD8FF', border:'#C488F5'},
+  };
+}
+
+const AGENT_DATA = [
+  {id:'carlos',   name:'Carlos',    role:'Jefe Compras',   dept:'admin',color:'#7BAAFF',initials:'CA',skills:['Analizar proveedores','Seleccionar óptimo','Aprobar compra']},
+  {id:'valentina',name:'Valentina', role:'Administrativa', dept:'admin',color:'#93B4F5',initials:'VA',skills:['Solicitar docs','Enviar aprobación','Notificar gerencia']},
+  {id:'miguel',   name:'Miguel',    role:'Analista ERP',   dept:'admin',color:'#6090E0',initials:'MI',skills:['Crear orden compra','Registrar ERP','Conciliar factura']},
+  {id:'sofia',    name:'Sofía',     role:'Dir. Marketing', dept:'mkt',  color:'#FF8855',initials:'SO',skills:['Definir audiencia','Brief campaña','Supervisar KPIs']},
+  {id:'andres',   name:'Andrés',    role:'Ads Specialist', dept:'mkt',  color:'#FFAA80',initials:'AN',skills:['Generar anuncio IA','Subir a Meta','Optimizar A/B']},
+  {id:'laura',    name:'Laura',     role:'CRM Manager',    dept:'mkt',  color:'#FF7050',initials:'LA',skills:['Importar leads','Nutrir CRM','Agendar demos']},
+  {id:'ana',      name:'Ana',       role:'Contadora',      dept:'cont', color:'#34E8A0',initials:'AN',skills:['Supervisar facturas','Cobros pendientes','Informe gerencia']},
+  {id:'roberto',  name:'Roberto',   role:'Facturación',    dept:'cont', color:'#60DDB0',initials:'RO',skills:['Generar factura','Enviar cliente','Archivar ERP']},
+  {id:'patricia', name:'Patricia',  role:'Tesorera',       dept:'cont', color:'#20C080',initials:'PA',skills:['Validar cliente','Conciliar pagos','Reportes caja']},
+  {id:'mateo',    name:'Mateo',     role:'Director IA',    dept:'ia',   color:'#C44DFF',initials:'MA',skills:['Monitorear servidor','Revisar uptime','Analizar ROI']},
+  {id:'isabella', name:'Isabella',  role:'Agent Designer', dept:'ia',   color:'#A855F7',initials:'IS',skills:['Configurar agentes','Personalizar skills','Deploy prod']},
+  {id:'sebastian',name:'Sebastián', role:'Knowledge Eng.', dept:'ia',   color:'#9040E0',initials:'SE',skills:['Alimentar KB','Embeddings docs','Actualizar base']},
+];
+
+function hexA(h,a){if(!h||h.length<7)return `rgba(100,100,100,${a})`;const r=parseInt(h.slice(1,3),16),g=parseInt(h.slice(3,5),16),b=parseInt(h.slice(5,7),16);return `rgba(${r},${g},${b},${a})`;}
+function rr(c,x,y,w,h,rd){const r=typeof rd==='number'?rd:4;c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.arcTo(x+w,y,x+w,y+r,r);c.lineTo(x+w,y+h-r);c.arcTo(x+w,y+h,x+w-r,y+h,r);c.lineTo(x+r,y+h);c.arcTo(x,y+h,x,y+h-r,r);c.lineTo(x,y+r);c.arcTo(x,y,x+r,y,r);c.closePath();}
+function el(id){return document.getElementById(id);}
+function setText(id,v){const e=el(id);if(e)e.textContent=v;}
+
+class GAgent {
+  constructor(d){
+    Object.assign(this,d);
+    this.x=0;this.y=0;this.tx=0;this.ty=0;
+    this.state='working';this.speed=0.7+Math.random()*.5;
+    this.skillIdx=0;this.currentSkill=d.skills[0];
+    this.progress=Math.random()*80;this.taskCount=0;
+    this.animTick=0;this.animFrame=0;
+    this.trail=[];this.msgAlpha=0;this.currentMsg='';
+  }
+  placeInZone(){
+    const z=getZones()[this.dept];
+    this.x=z.x+z.w*.15+Math.random()*z.w*.7;
+    this.y=z.y+z.h*.3+Math.random()*z.h*.5;
+    this.tx=this.x;this.ty=this.y;
+  }
+  update(){
+    this.animTick++;if(this.animTick>12){this.animFrame=(this.animFrame+1)%4;this.animTick=0;}
+    const dx=this.tx-this.x,dy=this.ty-this.y,dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist>1.5){this.x+=dx/dist*this.speed*gspd;this.y+=dy/dist*this.speed*gspd;
+      if(gtick%5===0)this.trail.push({x:this.x,y:this.y,a:.3});}
+    this.trail=this.trail.filter(t=>{t.a-=.035;return t.a>0;});
+    if(this.msgAlpha>0)this.msgAlpha-=.008;
+    this.progress=Math.min(100,this.progress+.07*gspd);
+    if(this.progress>=100){
+      this.progress=0;this.taskCount++;GM.totalTasks++;GM.ia.tasks++;
+      this.skillIdx=(this.skillIdx+1)%this.skills.length;
+      this.currentSkill=this.skills[this.skillIdx];this.showMsg(this.currentSkill);
+    }
+    const z=getZones()[this.dept];
+    if(dist<4){this.tx=z.x+z.w*.1+Math.random()*z.w*.8;this.ty=z.y+z.h*.22+Math.random()*z.h*.6;}
+  }
+  showMsg(m){this.currentMsg=m;this.msgAlpha=1;}
+  draw(){
+    const x=Math.round(this.x),y=Math.round(this.y);
+    this.trail.forEach(t=>{ctx.globalAlpha=t.a*.12;ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(t.x,t.y,3,0,Math.PI*2);ctx.fill();});ctx.globalAlpha=1;
+    ctx.globalAlpha=.12;ctx.fillStyle='#000';ctx.beginPath();ctx.ellipse(x,y+16,10,3,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
+    this.drawChar(x,y);
+    const nw=this.name.length*5.5+12;
+    ctx.fillStyle='rgba(8,3,20,.92)';rr(ctx,x-nw/2,y-31,nw,14,3);ctx.fill();
+    ctx.strokeStyle=this.color;ctx.lineWidth=1;rr(ctx,x-nw/2,y-31,nw,14,3);ctx.stroke();
+    ctx.fillStyle=this.color;ctx.font='600 9.5px Inter';ctx.textAlign='center';ctx.fillText(this.name,x,y-21);
+    ctx.fillStyle=this.state==='working'?'#00FF94':this.state==='proc'?'#60B0FF':'#C44DFF';
+    ctx.beginPath();ctx.arc(x+nw/2-5,y-25,3.5,0,Math.PI*2);ctx.fill();
+    if(this.msgAlpha>0.05){
+      ctx.globalAlpha=Math.min(this.msgAlpha,.95);
+      const txt=this.currentMsg.substring(0,20),bw=txt.length*5.2+14;
+      ctx.fillStyle='rgba(8,3,20,.95)';rr(ctx,x-bw/2,y-52,bw,16,4);ctx.fill();
+      ctx.strokeStyle=this.color;ctx.lineWidth=1;rr(ctx,x-bw/2,y-52,bw,16,4);ctx.stroke();
+      ctx.fillStyle='#E8D8FF';ctx.font='500 9px Inter';ctx.textAlign='center';ctx.fillText(txt,x,y-41);ctx.globalAlpha=1;
+    }
+    if(this.state==='working'||this.state==='proc'){
+      ctx.fillStyle='rgba(0,0,0,.15)';rr(ctx,x-14,y+18,28,4,2);ctx.fill();
+      ctx.fillStyle=this.color;ctx.globalAlpha=.7;rr(ctx,x-14,y+18,28*this.progress/100,4,2);ctx.fill();ctx.globalAlpha=1;
+    }
+  }
+  drawChar(x,y){
+    const c=this.color,mv=Math.abs(this.tx-this.x)>2||Math.abs(this.ty-this.y)>2,lo=mv?(this.animFrame%2===0?2:-2):0;
+    ctx.fillStyle='#FDDCAB';ctx.beginPath();ctx.arc(x,y-7,7,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y-10,7,Math.PI,Math.PI*2);ctx.fill();ctx.fillRect(x-7,y-10,14,4);
+    ctx.fillStyle='#1A2040';ctx.fillRect(x-3,y-8,2,2);ctx.fillRect(x+1,y-8,2,2);
+    ctx.fillStyle=c;rr(ctx,x-6,y,12,11,2);ctx.fill();
+    ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillRect(x-2,y,4,4);
+    ctx.fillStyle=c;ctx.fillRect(x-9,y,3,8+lo*.5);ctx.fillRect(x+6,y,3,8-lo*.5);
+    ctx.fillStyle='#FDDCAB';ctx.beginPath();ctx.arc(x-7.5,y+8+lo*.5,2.5,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(x+7.5,y+8-lo*.5,2.5,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#2D3A60';ctx.fillRect(x-5,y+11,4,7+lo);ctx.fillRect(x+1,y+11,4,7-lo);
+    ctx.fillStyle='#111';ctx.fillRect(x-6,y+18+lo,6,2.5);ctx.fillRect(x+0,y+18-lo,6,2.5);
+    if(this.state==='working'){ctx.globalAlpha=.05+.03*Math.sin(gtick*.1);ctx.fillStyle=c;ctx.beginPath();ctx.arc(x,y,22,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;}
+  }
+}
+
+let gpackets=[];
+function gSpawn(from,to,color,label,ico){
+  const z1=getZones()[from],z2=getZones()[to];
+  gpackets.push({x:z1.x+z1.w*.5,y:z1.y+z1.h*.5,tx:z2.x+z2.w*.5,ty:z2.y+z2.h*.5,color,label,ico:ico||'●',progress:0,speed:.007+Math.random()*.006,alpha:1});
+}
+function updateGPkts(){gpackets=gpackets.filter(p=>{p.progress+=p.speed*gspd;if(p.progress>=1){p.alpha-=.05;return p.alpha>0;}return true;});}
+function drawGPkts(){
+  gpackets.forEach(p=>{
+    const t=p.progress,cx=(p.x+p.tx)/2,cy=Math.min(p.y,p.ty)-40;
+    const bx=(1-t)*(1-t)*p.x+2*(1-t)*t*cx+t*t*p.tx,by=(1-t)*(1-t)*p.y+2*(1-t)*t*cy+t*t*p.ty;
+    ctx.globalAlpha=p.alpha*.18;ctx.strokeStyle=p.color;ctx.lineWidth=1.5;ctx.setLineDash([3,6]);
+    ctx.beginPath();for(let i=0;i<=t;i+=.05){const bxi=(1-i)*(1-i)*p.x+2*(1-i)*i*cx+i*i*p.tx,byi=(1-i)*(1-i)*p.y+2*(1-i)*i*cy+i*i*p.ty;i<.01?ctx.moveTo(bxi,byi):ctx.lineTo(bxi,byi);}
+    ctx.stroke();ctx.setLineDash([]);
+    ctx.globalAlpha=p.alpha;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(bx,by,7,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#fff';ctx.font='9px Inter';ctx.textAlign='center';ctx.fillText(p.ico,bx,by+3.5);ctx.globalAlpha=1;
+  });
+}
+
+function drawGMon(x,y,a){ctx.fillStyle='#1A2040';rr(ctx,x,y,26,17,2);ctx.fill();ctx.fillStyle=a;ctx.globalAlpha=.55;rr(ctx,x+2,y+2,22,13,1);ctx.fill();ctx.globalAlpha=1;ctx.fillStyle='#8891A8';ctx.fillRect(x+10,y+17,6,5);ctx.fillRect(x+6,y+22,14,2);}
+function drawGSrv(x,y,w,h,color){ctx.fillStyle='#1A2040';rr(ctx,x,y,w,h,3);ctx.fill();ctx.strokeStyle=hexA(color,.5);ctx.lineWidth=1;rr(ctx,x,y,w,h,3);ctx.stroke();const rows=Math.floor(h/16);for(let i=0;i<rows;i++){ctx.fillStyle='#252F50';ctx.fillRect(x+3,y+3+i*16,w-6,12);for(let j=0;j<3;j++){const on=Math.sin(gtick*.12+i*.8+j*1.5)>.3;ctx.fillStyle=on?(j%2===0?'#00FF94':color):'#2D3A60';ctx.beginPath();ctx.arc(x+7+j*8,y+9+i*16,2.5,0,Math.PI*2);ctx.fill();}}}
+function drawGSrvWall(x,y,w,h,color){ctx.fillStyle='#1A2040';rr(ctx,x,y,w,h,5);ctx.fill();ctx.strokeStyle=hexA(color,.6);ctx.lineWidth=1.5;rr(ctx,x,y,w,h,5);ctx.stroke();const rows=Math.floor(h/22);for(let i=0;i<rows;i++){ctx.fillStyle='#252F50';rr(ctx,x+4,y+4+i*22,w-8,17,2);ctx.fill();for(let j=0;j<4;j++){const on=Math.sin(gtick*.1+i*.6+j*.9)>.2;ctx.fillStyle=on?(j%3===0?'#00FF94':j%3===1?color:'#38BDF8'):'#1A2040';ctx.beginPath();ctx.arc(x+9+j*11,y+12+i*22,2.5,0,Math.PI*2);ctx.fill();}ctx.fillStyle=hexA(color,.5);ctx.font='7px Space Mono';ctx.textAlign='left';ctx.fillText('SRV-0'+i,x+w-28,y+15+i*22);}}
+
+function drawGFurniture(key,z){
+  const ix=z.x+12,iy=z.y+34,iw=z.w-24,ih=z.h-44,c=z.color;
+  if(key==='admin'){
+    ctx.fillStyle='rgba(59,111,212,.22)';rr(ctx,ix,iy,iw*.52,ih*.22,3);ctx.fill();ctx.fillStyle=c;ctx.fillRect(ix,iy,iw*.52,3);
+    drawGMon(ix+iw*.04,iy+2,'#7BAAFF');drawGMon(ix+iw*.26,iy+2,'#93B4F5');
+    drawGSrv(ix+iw*.7,iy,iw*.26,ih*.5,'#3B6FD4');
+    ctx.fillStyle=hexA(c,.12);rr(ctx,ix,iy+ih*.52,iw*.62,ih*.22,4);ctx.fill();ctx.strokeStyle=hexA(c,.3);ctx.lineWidth=1;rr(ctx,ix,iy+ih*.52,iw*.62,ih*.22,4);ctx.stroke();
+    ctx.fillStyle='#B8D4FF';ctx.font='600 8px Inter';ctx.textAlign='center';ctx.fillText('ÓRDENES: '+GM.admin.oc+'  |  ERP: '+GM.admin.erp,ix+iw*.31,iy+ih*.65);
+  }
+  if(key==='mkt'){
+    ctx.fillStyle='rgba(232,80,10,.2)';rr(ctx,ix,iy,iw*.46,ih*.22,3);ctx.fill();ctx.fillStyle=c;ctx.fillRect(ix,iy,iw*.46,3);
+    drawGMon(ix+iw*.03,iy+2,'#FF8855');drawGMon(ix+iw*.24,iy+2,'#FFAA80');
+    ctx.fillStyle='rgba(232,80,10,.16)';rr(ctx,ix+iw*.52,iy,iw*.44,ih*.38,4);ctx.fill();ctx.strokeStyle=hexA(c,.35);ctx.lineWidth=1;rr(ctx,ix+iw*.52,iy,iw*.44,ih*.38,4);ctx.stroke();
+    ctx.fillStyle='#FF8855';ctx.font='700 9px Inter';ctx.textAlign='center';ctx.fillText('META ADS LIVE',ix+iw*.74,iy+ih*.14);
+    ctx.fillStyle='#FFBB90';ctx.font='8px Inter';ctx.fillText('Leads: '+GM.mkt.leads+' | Demos: '+GM.mkt.meets,ix+iw*.74,iy+ih*.24);
+    const stages=Math.min(GM.mkt.leads,4);
+    for(let i=0;i<4;i++){const fw=iw*(.38-i*.07),fx=ix+(iw*.46-fw)/2;ctx.fillStyle=i<stages?hexA(c,.3):hexA(c,.08);rr(ctx,fx,iy+ih*.5+i*ih*.12,fw,ih*.1,2);ctx.fill();}
+  }
+  if(key==='cont'){
+    ctx.fillStyle='rgba(18,160,107,.2)';rr(ctx,ix,iy,iw*.56,ih*.22,3);ctx.fill();ctx.fillStyle=c;ctx.fillRect(ix,iy,iw*.56,3);
+    drawGMon(ix+iw*.03,iy+2,'#34E8A0');drawGMon(ix+iw*.28,iy+2,'#60DDB0');
+    for(let i=Math.min(GM.cont.fac,5);i>=0;i--){ctx.fillStyle=i%2===0?'rgba(255,255,255,.18)':'rgba(100,220,160,.12)';rr(ctx,ix+iw*.63+i,iy+i,iw*.33-i*2,ih*.38-i,3);ctx.fill();ctx.strokeStyle=hexA(c,.2);ctx.lineWidth=1;rr(ctx,ix+iw*.63+i,iy+i,iw*.33-i*2,ih*.38-i,3);ctx.stroke();}
+    ctx.fillStyle='#34E8A0';ctx.font='700 9px Inter';ctx.textAlign='center';ctx.fillText(GM.cont.fac+' facturas',ix+iw*.79,iy+ih*.22);
+    ctx.fillStyle=hexA(c,.1);rr(ctx,ix,iy+ih*.52,iw*.56,ih*.28,4);ctx.fill();ctx.fillStyle='#60DDB0';ctx.font='600 8px Inter';ctx.textAlign='center';ctx.fillText('$'+Math.round(GM.cont.val/1000)+'k facturado',ix+iw*.28,iy+ih*.68);
+  }
+  if(key==='ia'){
+    drawGSrvWall(ix,iy,iw*.38,ih*.92,'#7B2FBE');
+    ctx.fillStyle='rgba(123,47,190,.2)';rr(ctx,ix+iw*.44,iy,iw*.52,ih*.22,3);ctx.fill();ctx.fillStyle=c;ctx.fillRect(ix+iw*.44,iy,iw*.52,3);
+    drawGMon(ix+iw*.47,iy+2,'#C44DFF');drawGMon(ix+iw*.68,iy+2,'#A855F7');
+    ctx.fillStyle=hexA(c,.1);rr(ctx,ix+iw*.44,iy+ih*.3,iw*.52,ih*.62,4);ctx.fill();ctx.strokeStyle=hexA(c,.22);ctx.lineWidth=1;rr(ctx,ix+iw*.44,iy+ih*.3,iw*.52,ih*.62,4);ctx.stroke();
+    ctx.fillStyle='#C44DFF';ctx.font='700 8px Inter';ctx.textAlign='center';ctx.fillText('AGENTES ACTIVOS',ix+iw*.7,iy+ih*.4);
+    const cols=[{l:'Admin 3×',c:'#7BAAFF'},{l:'Mkt 3×',c:'#FF8855'},{l:'Cont 3×',c:'#34E8A0'},{l:'IA 3×',c:'#C44DFF'}];
+    cols.forEach((d,i)=>{const bx=ix+iw*.46+(i%2)*iw*.26,by=iy+ih*.46+Math.floor(i/2)*ih*.2;ctx.fillStyle=hexA(d.c,.2);rr(ctx,bx,by,iw*.23,ih*.16,3);ctx.fill();ctx.fillStyle=d.c;ctx.font='600 8px Inter';ctx.textAlign='center';ctx.fillText(d.l,bx+iw*.115,by+ih*.1);});
+    ctx.fillStyle='#B090D0';ctx.font='600 8px Inter';ctx.textAlign='center';ctx.fillText('Productividad: '+(55+Math.min(44,GM.totalTasks))+'%',ix+iw*.7,iy+ih*.88);
+  }
+}
+
+function drawGOffice(){
+  ctx.fillStyle='#08051A';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#06030F';ctx.fillRect(0,0,W,22);
+  ctx.strokeStyle='rgba(155,48,255,.3)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,22);ctx.lineTo(W,22);ctx.stroke();
+  ctx.fillStyle='#C44DFF';ctx.font='600 9px Space Mono';ctx.textAlign='left';ctx.fillText('◈ GENESIS ENTERPRISE — IA OPERATIONS CENTER',10,14);
+  ctx.fillStyle='#00FF94';ctx.font='9px Space Mono';ctx.textAlign='right';ctx.fillText('● '+agents.filter(a=>a.state!=='idle').length+'/'+agents.length+' activos',W-10,14);
+  const zones=getZones();
+  Object.entries(zones).forEach(([key,z])=>{
+    ctx.fillStyle=z.floor;rr(ctx,z.x+2,z.y+2,z.w-4,z.h-4,7);ctx.fill();
+    ctx.save();ctx.beginPath();rr(ctx,z.x+2,z.y+2,z.w-4,z.h-4,7);ctx.clip();
+    const ts=22;for(let ty=z.y;ty<z.y+z.h;ty+=ts)for(let tx=z.x;tx<z.x+z.w;tx+=ts)if(((Math.floor((ty-z.y)/ts)+Math.floor((tx-z.x)/ts))%2)===0){ctx.fillStyle='rgba(255,255,255,.3)';ctx.fillRect(tx,ty,ts,ts);}
+    ctx.restore();
+    ctx.strokeStyle=z.border;ctx.lineWidth=2;rr(ctx,z.x+2,z.y+2,z.w-4,z.h-4,7);ctx.stroke();
+    ctx.strokeStyle=hexA(z.color,.07);ctx.lineWidth=5;rr(ctx,z.x+4,z.y+4,z.w-8,z.h-8,5);ctx.stroke();
+    ctx.fillStyle=hexA(z.color,.16);rr(ctx,z.x+2,z.y+2,z.w-4,26,4);ctx.fill();
+    ctx.strokeStyle=hexA(z.border,.5);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(z.x+2,z.y+28);ctx.lineTo(z.x+z.w-2,z.y+28);ctx.stroke();
+    ctx.fillStyle='#E8E0FF';ctx.font='700 10px Syne';ctx.textAlign='center';ctx.fillText(z.label,z.x+z.w/2,z.y+18);
+    drawGFurniture(key,z);
+  });
+  const arrows=[{f:'ia',t:'admin',c:'#7B2FBE'},{f:'ia',t:'mkt',c:'#7B2FBE'},{f:'ia',t:'cont',c:'#7B2FBE'},{f:'mkt',t:'cont',c:'#E8500A',active:GM.mkt.meets>0}];
+  arrows.forEach(a=>{if(a.active===false)return;const z1=zones[a.f],z2=zones[a.t],sx=z1.x+z1.w*.5,sy=z1.y+z1.h*.5,ex=z2.x+z2.w*.5,ey=z2.y+z2.h*.5,p=Math.sin(gtick*.05)*.5+.5;ctx.globalAlpha=.04+p*.04;ctx.strokeStyle=a.c;ctx.lineWidth=1.5;ctx.setLineDash([4,8]);ctx.beginPath();ctx.moveTo(sx,sy);ctx.lineTo(ex,ey);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;});
+}
+
+const agents = AGENT_DATA.map(d=>new GAgent(d));
+let gtick=0,gspd=1;
+
+function gloop(){
+  gtick++;ctx.clearRect(0,0,W,H);drawGOffice();updateGPkts();drawGPkts();
+  agents.forEach(a=>{a.update();a.draw();});updateGDashboard();
+  requestAnimationFrame(gloop);
+}
+
+// ── DASHBOARD ────────────────────────────────────────────────
+const gdLogs=[];
+function gdAddLog(who,msg,dept){
+  const colors={admin:'#7BAAFF',mkt:'#FF8855',cont:'#34E8A0',ia:'#C44DFF'};
+  const now=new Date(),t=`${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
+  gdLogs.unshift({who,msg,dept,t,color:colors[dept]||'#C44DFF'});if(gdLogs.length>40)gdLogs.pop();renderLog();
+}
+function renderLog(){
+  const b=el('gd-log-list');if(!b)return;
+  b.innerHTML=gdLogs.slice(0,20).map(l=>`
+    <div style="padding:6px 8px;background:rgba(${l.dept==='admin'?'59,111,212':l.dept==='mkt'?'232,80,10':l.dept==='cont'?'18,160,107':'123,47,190'},.07);border-left:2px solid ${l.color};border-radius:0 5px 5px 0;margin-bottom:5px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:2px;">
+        <span style="font-family:'Space Mono',monospace;font-size:8px;font-weight:700;color:${l.color};">${l.who}</span>
+        <span style="font-family:'Space Mono',monospace;font-size:8px;color:#4A3860;">${l.t}</span>
+      </div>
+      <div style="font-size:10px;color:#C0B0D8;line-height:1.4;">${l.msg}</div>
+    </div>`).join('');
+}
+function renderEquipo(){
+  const b=el('gd-agent-list');if(!b)return;
+  const scol={working:'rgba(0,255,148,.08)',proc:'rgba(96,176,255,.08)',send:'rgba(255,214,0,.08)',idle:'rgba(155,48,255,.06)'};
+  const stxt={working:'#00FF94',proc:'#60B0FF',send:'#FFD600',idle:'#C44DFF'};
+  b.innerHTML=agents.map(a=>`
+    <div style="display:flex;align-items:center;gap:8px;padding:7px 8px;background:${scol[a.state]||scol.idle};border-radius:6px;margin-bottom:5px;border:1px solid rgba(255,255,255,.04);">
+      <div style="width:30px;height:30px;border-radius:50%;background:${a.color};display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#08051A;flex-shrink:0;">${a.initials}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:11px;font-weight:600;color:${a.color};white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${a.name}</div>
+        <div style="font-size:9px;color:#8070A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${a.role}</div>
+        <div style="font-size:9px;color:#C0B0D8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${a.currentSkill}</div>
+      </div>
+      <div style="font-size:8px;font-weight:700;padding:2px 6px;border-radius:10px;background:${scol[a.state]};color:${stxt[a.state]||stxt.idle};white-space:nowrap;flex-shrink:0;border:1px solid ${stxt[a.state]||stxt.idle}40;">${a.state.toUpperCase()}</div>
+    </div>`).join('');
+}
+function renderKPIs(){
+  const b=el('gd-pipeline-bars');if(!b)return;
+  const stages=[
+    {l:'Leads captados',v:GM.mkt.leads,max:30,c:'#FF8855'},
+    {l:'Calificados',v:Math.floor(GM.mkt.leads*.65),max:20,c:'#FFD600'},
+    {l:'Demos agendadas',v:GM.mkt.meets,max:10,c:'#34E8A0'},
+    {l:'Órdenes compra',v:GM.admin.oc,max:10,c:'#7BAAFF'},
+    {l:'Facturas emitidas',v:GM.cont.fac,max:15,c:'#C44DFF'},
+  ];
+  b.innerHTML=stages.map(s=>`
+    <div style="margin-bottom:8px;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:3px;">
+        <span style="font-size:9px;color:#C0B0D8;">${s.l}</span>
+        <span style="font-size:9px;font-weight:700;color:${s.c};font-family:'Space Mono',monospace;">${s.v}</span>
+      </div>
+      <div style="height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;background:${s.c};border-radius:3px;width:${Math.min(100,s.v/s.max*100)}%;transition:width .5s;"></div>
+      </div>
+    </div>`).join('');
+  setText('gd-hours',Math.round(GM.totalTasks*2.4)+'h');
+  const sc=el('gd-spark');if(!sc)return;
+  const sw=sc.parentElement.clientWidth||220,sh=60;sc.width=sw;sc.height=sh;
+  const sc2=sc.getContext('2d');sc2.clearRect(0,0,sw,sh);
+  const mx=Math.max(...sparkData,1);
+  const grad=sc2.createLinearGradient(0,0,0,sh);grad.addColorStop(0,'rgba(196,77,255,.22)');grad.addColorStop(1,'rgba(196,77,255,.01)');
+  sc2.fillStyle=grad;sc2.beginPath();sc2.moveTo(0,sh);
+  sparkData.forEach((v,i)=>{const px=i/(sparkData.length-1)*sw,py=sh-(v/mx)*sh*.85-2;i===0?sc2.lineTo(px,py):sc2.lineTo(px,py);});
+  sc2.lineTo(sw,sh);sc2.closePath();sc2.fill();
+  sc2.strokeStyle='#C44DFF';sc2.lineWidth=1.5;sc2.lineJoin='round';sc2.beginPath();
+  sparkData.forEach((v,i)=>{const px=i/(sparkData.length-1)*sw,py=sh-(v/mx)*sh*.85-2;i===0?sc2.moveTo(px,py):sc2.lineTo(px,py);});sc2.stroke();
+}
+function updateGDashboard(){
+  setText('gd-oc',GM.admin.oc);setText('gd-leads',GM.mkt.leads);setText('gd-fac',GM.cont.fac);setText('gd-pipe','$'+GM.pipeline.toLocaleString());
+  setText('gd2-oc',GM.admin.oc);setText('gd2-prov',GM.admin.prov);setText('gd2-erp',GM.admin.erp);
+  setText('gd2-leads',GM.mkt.leads);setText('gd2-ads',GM.mkt.ads);setText('gd2-meets',GM.mkt.meets);
+  setText('gd2-fac',GM.cont.fac);setText('gd2-cli',GM.cont.cli);setText('gd2-val','$'+Math.round(GM.cont.val/1000)+'k');
+  setText('gd2-tasks',GM.ia.tasks);
+  setText('gd-active-count',agents.filter(a=>a.state!=='idle').length+'/'+agents.length+' activos');
+  if(gtick%45===0){sparkData.push(GM.totalTasks);sparkData.shift();}
+  if(gdActiveTab==='equipo')renderEquipo();
+  if(gdActiveTab==='kpis')renderKPIs();
+}
+
+// ── TABS ─────────────────────────────────────────────────────
+let gdActiveTab='dptos';
+window.gdSetTab=function(tab){
+  gdActiveTab=tab;
+  ['dptos','equipo','kpis','log'].forEach(t=>{
+    const body=el('gdtab-'+t+'-body');if(body)body.style.display=t===tab?'block':'none';
+    const btn=el('gdtab-'+t);if(btn){btn.style.color=t===tab?'#C44DFF':'#5A4A70';btn.style.borderBottomColor=t===tab?'#C44DFF':'transparent';}
+  });
+  if(tab==='equipo')renderEquipo();
+  if(tab==='kpis')renderKPIs();
+  if(tab==='log')renderLog();
+};
+
+// ── AUTOMATIONS ──────────────────────────────────────────────
+function ag(id){return agents.find(a=>a.id===id);}
+window.genesisRunDept=function(key){({admin:gRunAdmin,mkt:gRunMkt,cont:gRunCont,ia:gRunIA})[key]?.();};
+window.genesisRunAll=function(){gRunIA();setTimeout(gRunAdmin,1500/gspd);setTimeout(gRunMkt,2800/gspd);setTimeout(gRunCont,4800/gspd);};
+window.genesisReset=function(){
+  Object.assign(GM,{admin:{oc:0,prov:0,erp:0},mkt:{leads:0,ads:0,meets:0},cont:{fac:0,cli:0,val:0},ia:{tasks:0},totalTasks:0,pipeline:0});
+  gpackets=[];sparkData.fill(0);gdLogs.length=0;agents.forEach(a=>{a.state='working';a.progress=0;a.taskCount=0;});
+  gdAddLog('GENESIS','Sistema reiniciado — listo para demo','ia');
+};
+
+function gRunAdmin(){
+  const carlos=ag('carlos'),valentina=ag('valentina'),miguel=ag('miguel');
+  carlos.showMsg('Analizando proveedores');carlos.state='proc';gdAddLog('Carlos','Analizando proveedores en base de datos ERP','admin');
+  setTimeout(()=>{GM.admin.prov++;carlos.showMsg('Proveedor OK ✓');valentina.showMsg('Enviando aprobación…');valentina.state='send';gdAddLog('Valentina','Email de aprobación enviado + copia a Gerencia','admin');
+    setTimeout(()=>{gSpawn('admin','ia','#7BAAFF','📧 Aprobación','📧');
+      setTimeout(()=>{GM.admin.oc++;miguel.showMsg('Creando OC #'+GM.admin.oc);miguel.state='proc';gdAddLog('Miguel','Orden de compra #OC-'+GM.admin.oc.toString().padStart(4,'0')+' generada','admin');
+        setTimeout(()=>{GM.admin.erp++;miguel.showMsg('ERP actualizado ✓');miguel.state='working';valentina.state='working';carlos.state='working';GM.pipeline+=3500;GM.totalTasks+=3;gdAddLog('Miguel','Factura recibida y conciliada en ERP','admin');},2000/gspd);},1500/gspd);},2000/gspd);},1500/gspd);
+}
+function gRunMkt(){
+  const sofia=ag('sofia'),andres=ag('andres'),laura=ag('laura');
+  sofia.showMsg('Definiendo audiencia…');sofia.state='proc';gdAddLog('Sofía','Iniciando campaña Meta Ads con IA creativa','mkt');
+  setTimeout(()=>{GM.mkt.ads++;andres.showMsg('IA genera anuncio ✓');andres.state='proc';gdAddLog('Andrés','IA generó '+GM.mkt.ads+' variantes de anuncio A/B','mkt');
+    setTimeout(()=>{andres.showMsg('Subiendo a Meta ✓');gSpawn('mkt','ia','#FF8855','Meta Launch','🚀');gdAddLog('Andrés','Campaña activa en Meta — presupuesto asignado','mkt');
+      setTimeout(()=>{const n=3+Math.floor(Math.random()*4);GM.mkt.leads+=n;gSpawn('mkt','cont','#FF8855',n+' leads','👥');laura.showMsg(n+' leads al CRM ✓');laura.state='proc';gdAddLog('Laura',n+' leads importados al CRM desde Meta Ads','mkt');
+        setTimeout(()=>{GM.mkt.meets+=2;GM.pipeline+=4000;laura.showMsg('2 demos agendadas ✓');laura.state='working';andres.state='working';sofia.state='working';GM.totalTasks+=5;gdAddLog('Laura','2 demos del producto agendadas automáticamente','mkt');},2000/gspd);},1500/gspd);},2000/gspd);},1500/gspd);
+}
+function gRunCont(){
+  const ana=ag('ana'),roberto=ag('roberto'),patricia=ag('patricia');
+  patricia.showMsg('Validando datos cliente');patricia.state='proc';gdAddLog('Patricia','Validando datos fiscales del nuevo cliente','cont');
+  setTimeout(()=>{GM.cont.cli++;roberto.showMsg('Generando factura…');roberto.state='proc';gdAddLog('Roberto','Iniciando factura FE-'+GM.cont.fac.toString().padStart(6,'0'),'cont');
+    setTimeout(()=>{GM.cont.fac++;GM.cont.val+=2500+Math.floor(Math.random()*5000);gSpawn('cont','mkt','#34E8A0','💳 Factura','💳');roberto.showMsg('Factura enviada ✓');roberto.state='working';gdAddLog('Roberto','Factura enviada al cliente con CC al Gerente de Ventas','cont');
+      setTimeout(()=>{ana.showMsg('Registrado en ERP ✓');ana.state='working';patricia.state='working';GM.pipeline+=GM.cont.val*.08;GM.totalTasks+=3;gdAddLog('Ana','Cuentas por cobrar y reportes gerenciales actualizados','cont');},1500/gspd);},2000/gspd);},1500/gspd);
+}
+function gRunIA(){
+  const mateo=ag('mateo'),isabella=ag('isabella'),sebastian=ag('sebastian');
+  mateo.showMsg('Servidor OK — 99.9%');mateo.state='proc';gdAddLog('Mateo','Chequeo de servidores GENESIS — todos nominales','ia');
+  setTimeout(()=>{isabella.showMsg('Configurando agente…');isabella.state='proc';gdAddLog('Isabella','Nuevo agente configurado y listo para producción','ia');
+    setTimeout(()=>{sebastian.showMsg('Actualizando KB…');sebastian.state='proc';gdAddLog('Sebastián','Base de conocimiento actualizada: +5 nuevos docs','ia');
+      setTimeout(()=>{gSpawn('ia','admin','#C44DFF','Deploy IA','🤖');gSpawn('ia','mkt','#C44DFF','Deploy IA','🤖');gSpawn('ia','cont','#C44DFF','Deploy IA','🤖');GM.ia.tasks+=5;GM.totalTasks+=5;mateo.state='working';isabella.state='working';sebastian.state='working';gdAddLog('Mateo','ROI: +'+Math.round(GM.totalTasks*2.4)+'h automatizadas hoy','ia');},1500/gspd);},1500/gspd);},1500/gspd);
+}
+
+// ── EVENTS ───────────────────────────────────────────────────
+cv.addEventListener('click',e=>{
+  const rect=cv.getBoundingClientRect(),mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
+  let hit=false;
+  agents.forEach(a=>{if(Math.abs(a.x-mx)<16&&Math.abs(a.y-my)<24){a.showMsg(a.currentSkill+'...');gdSetTab('equipo');hit=true;}});
+  if(!hit){const zones=getZones();Object.entries(zones).forEach(([key,z])=>{if(mx>=z.x&&mx<=z.x+z.w&&my>=z.y&&my<=z.y+z.h){genesisRunDept(key);gdSetTab('log');}});}
+});
+cv.addEventListener('mousemove',e=>{
+  const rect=cv.getBoundingClientRect(),mx=(e.clientX-rect.left)*(W/rect.width),my=(e.clientY-rect.top)*(H/rect.height);
+  let f=false;agents.forEach(a=>{if(Math.abs(a.x-mx)<16&&Math.abs(a.y-my)<24)f=true;});cv.style.cursor=f?'pointer':'default';
+});
+
+// ── START ────────────────────────────────────────────────────
+resize();window.addEventListener('resize',()=>resize());
+agents.forEach(a=>a.placeInZone());
+gdAddLog('GENESIS','Sistema IA Operations iniciado ✓','ia');
+gdAddLog('GENESIS','12 agentes activos en 4 departamentos','ia');
+gdAddLog('GENESIS','Clic en cualquier zona o agente para interactuar','ia');
+setTimeout(window.genesisRunAll,1800);
+setInterval(()=>{if(Math.random()<.45)gRunAdmin();},22000);
+setInterval(()=>{if(Math.random()<.55)gRunMkt();},17000);
+setInterval(()=>{if(Math.random()<.4)gRunCont();},26000);
+gloop();
+})();
 </script>
 </body>
 </html>
